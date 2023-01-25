@@ -53,6 +53,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 10px;
+    --pagination-height: 5vh;
 }
 
 .list {
@@ -62,7 +63,7 @@ body {
     margin: 5px;
     background: var(--clr-body-bg);
     color: var(--clr-text);
-    max-height: calc(95vh - var(--headerHeight) - 50px);
+    max-height: calc(98vh - var(--headerHeight) - 50px);
 }
 
 
@@ -104,6 +105,12 @@ span {
 
 }
 
+h3 {
+    padding: 0;
+    margin: 0;
+    align-self: center;
+}
+
 .error {
     color: red;
     position: absolute;
@@ -117,8 +124,11 @@ span {
 .board {
     display: flex;
     flex-direction: row;
+    padding-top: 20px;
+    overflow-x: auto;
+    padding: 20px 0 0 10px;
     background-color: var(--clr-board);
-    height: calc(95vh - var(--headerHeight))
+    height: calc(100vh - var(--headerHeight))
 }
 
 
@@ -263,6 +273,38 @@ span {
     margin-left: 1em;
 }
 
+.colorPicker {
+    float: right;
+}
+
+.colorPicker input[type="radio"] {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 10px;
+    outline: 3px solid var(--radio-color, currentColor);
+    outline-offset: 3px;
+    border-radius: 50%;
+}
+
+.colorPicker input[type="radio"]:checked {
+    background-color: var(--radio-color);
+}
+
+.colorPicker input[type="radio"]#black {
+    --radio-color: gray;
+}
+
+.colorPicker input[type="radio"]#purple {
+    --radio-color: rgb(152, 58, 196);
+}
+
+.colorPicker input[type="radio"]#blue {
+    --radio-color: blue;
+}
+
+
+
 .loadingSpinnerContainer {
     position: fixed;
     top: 0;
@@ -307,7 +349,10 @@ span {
 
 .header {
     height: 5vh;
+    background: rgb(252, 252, 252);
     display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 .colorSelector {

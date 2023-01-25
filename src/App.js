@@ -19,12 +19,9 @@ export function App() {
     const setNew = (url) => {
         setUrl(url)
     }
-    const [url, setUrl] = useState('');
-    const BASE_URL = url ? url : 'https://prg06.iettech.nl/lists?limit=2';
-    const loadCards = url => {
+    const [url, setUrl] = useState('https://prg06.iettech.nl/lists ');
 
-        if (!url) url = BASE_URL;
-
+    const loadCards = () => {
         fetch(url, {
             method: 'get',
             headers: {
@@ -42,21 +39,21 @@ export function App() {
         setPagination(data.pagination);
     }
     return (
-
-        < BrowserRouter >
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route path="/cards" element={<BoardLayout cards={cards} pagination={pagination} cardRefreshHandler={() => loadCards()} changePageHandler={setNew} />}>
-                        {/* <Route path="create" element={<CardForm cardRefreshHandler={() => loadJson()} />} /> */}
-                        <Route path=":id/create" element={<CreateCard cards={cards} cardRefreshHandler={() => loadCards()} />} />
-                        <Route path=":id/edit" element={<EditCard cards={cards} cardRefreshHandler={() => loadCards()} />} />
-                        <Route path=":id" element={<CardDetail cards={cards} cardRefreshHandler={() => loadCards()} />} />
+        <React.StrictMode>
+            < BrowserRouter >
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route path="/cards" element={<BoardLayout cards={cards} pagination={pagination} cardRefreshHandler={() => loadCards()} changePageHandler={setNew} />}>
+                            {/* <Route path="create" element={<CardForm cardRefreshHandler={() => loadJson()} />} /> */}
+                            <Route path=":id/create" element={<CreateCard cards={cards} cardRefreshHandler={() => loadCards()} />} />
+                            <Route path=":id/edit" element={<EditCard cards={cards} cardRefreshHandler={() => loadCards()} />} />
+                            <Route path=":id" element={<CardDetail cards={cards} cardRefreshHandler={() => loadCards()} />} />
+                        </Route>
+                        <Route path="*" element={<Error />} />
                     </Route>
-                    <Route path="*" element={<Error />} />
-                </Route>
 
-            </Routes>
-        </BrowserRouter >
-
+                </Routes>
+            </BrowserRouter >
+        </React.StrictMode>
     );
 }

@@ -1,11 +1,13 @@
 import { React } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export function Card(props) {
   const card = props.card;
+  const BASE_URL = 'https://prg06.iettech.nl/cards';
+  const params = useParams();
 
   const deleteCard = () => {
-    fetch(card._links.self.href, {
+    fetch(`${BASE_URL}/${card._id}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',

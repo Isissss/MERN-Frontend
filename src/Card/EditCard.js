@@ -33,7 +33,7 @@ export function EditCard(props) {
     }
 
     const EditCard = (e) => {
-        fetch(card._links.self.href, {
+        fetch(`${BASE_URL}/${params.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
