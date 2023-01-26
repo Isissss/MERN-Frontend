@@ -1,27 +1,23 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './scss/styles.scss';
-import { Layout } from './Layout';
-import { CardDetail } from './Card/CardDetail';
-import { Error } from './Error';
+import { Layout } from './components/Layout';
+import { CardDetail } from './components/Card/CardDetail';
+import { Error } from './components/Error';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { EditCard } from './Card/EditCard';
-import { CreateCard } from './Card/CreateCard';
-import { BoardLayout } from './BoardLayout';
+import { EditCard } from './components/Card/EditCard';
+import { CreateCard } from './components/Card/CreateCard';
+import { BoardLayout } from './components/BoardLayout';
 
 
 export const ThemaContext = React.createContext();
 
 export function App() {
-    const [cards, setCards] = useState([]);
+    const [lists, setLists] = useState([]);
     const [pagination, setPagination] = useState([]);
-    const [start, setStart] = useState(0);
-    const setNew = (url) => {
-        setUrl(url)
-    }
-    const [url, setUrl] = useState('https://prg06.iettech.nl/lists ');
+    const [url, setUrl] = useState('https://prg06.iettech.nl/lists');
 
-    const loadCards = () => {
+    const loadBoard = () => {
         fetch(url, {
             method: 'get',
             headers: {
@@ -29,31 +25,30 @@ export function App() {
             },
         })
             .then((data) => data.json())
-            .then((data) => test(data))
+            .then((data) => handleResponse(data))
             .catch((error) => console.log(error));
 
     };
-    useEffect(loadCards, [url]);
-    const test = (data) => {
-        setCards(data.items);
+    useEffect(loadBoard, [url]);
+
+    const handleResponse = (data) => {
+        setLists(data.items);
         setPagination(data.pagination);
     }
-    return (
-        <React.StrictMode>
-            < BrowserRouter >
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        <Route path="/cards" element={<BoardLayout cards={cards} pagination={pagination} cardRefreshHandler={() => loadCards()} changePageHandler={setNew} />}>
-                            {/* <Route path="create" element={<CardForm cardRefreshHandler={() => loadJson()} />} /> */}
-                            <Route path=":id/create" element={<CreateCard cards={cards} cardRefreshHandler={() => loadCards()} />} />
-                            <Route path=":id/edit" element={<EditCard cards={cards} cardRefreshHandler={() => loadCards()} />} />
-                            <Route path=":id" element={<CardDetail cards={cards} cardRefreshHandler={() => loadCards()} />} />
-                        </Route>
-                        <Route path="*" element={<Error />} />
-                    </Route>
 
-                </Routes>
-            </BrowserRouter >
-        </React.StrictMode>
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route path="/cards" element={<BoardLayout lists={lists} pagination={pagination} cardRefreshHandler={() => loadBoard()} changePageHandler={setUrl} />}>
+                        <Route path=":id/create" element={<CreateCard lists={lists} cardRefreshHandler={() => loadBoard()} />} />
+                        <Route path=":id/edit" element={<EditCard lists={lists} cardRefreshHandler={() => loadBoard()} />} />
+                        <Route path=":id" element={<CardDetail lists={lists} cardRefreshHandler={() => loadBoard()} />} />
+                    </Route>
+                    <Route path="*" element={<Error />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+
     );
 }

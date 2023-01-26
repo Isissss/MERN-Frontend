@@ -3,7 +3,6 @@ import { CloseButton, Form, Button } from "react-bootstrap";
 import { themeContext } from "./Layout";
 
 export function CreateListForm(props) {
-    const theme = useContext(themeContext);
     const inputRef = useRef();
     const [list, setList] = useState({ name: '' });
     useEffect(() => { inputRef.current.focus() }, []);

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { ErrorPopup } from "../ErrorPopup";
+
 export function CreateCard(props) {
     const [error, setError] = useState(false);
 
@@ -11,7 +12,6 @@ export function CreateCard(props) {
 
     function handleClose() {
         navigate("/cards", { replace: true })
-
     }
 
     const [card, setCard] = useState({
@@ -26,7 +26,6 @@ export function CreateCard(props) {
 
     function onChangeHandler(e) {
         setCard({ ...card, [e.target.name]: e.target.value });
-        console.log(card)
     }
 
     const handleError = (err) => {
@@ -35,7 +34,6 @@ export function CreateCard(props) {
     };
 
     const createCard = (e) => {
-
         if (card.title === '' || card.body === '' || card.severity === '' || card.location === '' || card.category === '') {
             return;
         }
@@ -52,6 +50,7 @@ export function CreateCard(props) {
             .then((res) => handleClose())
             .catch((err) => handleError(err));
     };
+
     return <div>
         {error && <ErrorPopup />}
         {!error &&
@@ -67,7 +66,7 @@ export function CreateCard(props) {
                         </Form.Group>
                         <Form.Group controlId="formBody">
                             <Form.Label>Body</Form.Label>
-                            <Form.Control value={card.body} onChange={onChangeHandler} name="body" />
+                            <Form.Control as="textarea" rows={3} name="body" value={card.body} onChange={onChangeHandler} />
                         </Form.Group>
                         <Form.Group controlId="formSev">
                             <Form.Label>Severity</Form.Label>

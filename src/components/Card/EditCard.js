@@ -2,11 +2,13 @@ import { Button, Form, Modal } from "react-bootstrap"
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+
 export function EditCard(props) {
     const params = useParams();
     const [card, setCard] = useState([]);
-
     const BASE_URL = 'https://prg06.iettech.nl/cards';
+    const navigate = useNavigate();
+
     const cardCall = () => {
         fetch(`${BASE_URL}/${params.id}`, {
             headers: {
@@ -17,20 +19,8 @@ export function EditCard(props) {
             .then((res) => setCard(res))
             .catch((err) => console.log(err));
     };
+
     useEffect(cardCall, []);
-
-    if (!card) return (<div>Card not found</div>);
-
-    const navigate = useNavigate();
-
-    function handleClose() {
-        navigate(`/cards`, { replace: true })
-    }
-
-    function onChangeHandler(e) {
-        setCard({ ...card, [e.target.name]: e.target.value });
-
-    }
 
     const EditCard = (e) => {
         fetch(`${BASE_URL}/${params.id}`, {
@@ -42,14 +32,29 @@ export function EditCard(props) {
             body: JSON.stringify(card)
         })
             .then((res) => props.cardRefreshHandler())
-            .then((res) => handleClose())
+            .then((res) => goBack())
             .catch((err) => console.log(err));
     };
+
+
+    if (!card) return (console.log("Loading"));
+
+    function handleClose() {
+        navigate(`/cards`, { replace: true })
+    }
+
+    function onChangeHandler(e) {
+        setCard({ ...card, [e.target.name]: e.target.value });
+
+    }
+    const goBack = () => {
+        navigate(`/cards/${params.id}`, { replace: true })
+    }
 
     return <div>
         <Modal show={true} onHide={() => handleClose()}>
             <Modal.Header closeButton>
-                <Modal.Title> New card </Modal.Title>
+                <Modal.Title> Edit card </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -59,7 +64,7 @@ export function EditCard(props) {
                     </Form.Group>
                     <Form.Group controlId="formBody">
                         <Form.Label>Body</Form.Label>
-                        <Form.Control value={card.body} onChange={onChangeHandler} name="body" />
+                        <Form.Control as="textarea" rows={3} name="body" value={card.body} onChange={onChangeHandler} />
                     </Form.Group>
                     <Form.Group controlId="formSev">
                         <Form.Label>Severity</Form.Label>
@@ -76,7 +81,7 @@ export function EditCard(props) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => navigate(`/cards/${card._id}`, { replace: true })}>
+                <Button variant="secondary" onClick={() => goBack()}>
                     Back
                 </Button>
                 <Button variant="primary" onClick={() => EditCard()}>

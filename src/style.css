@@ -6,7 +6,8 @@ p {
 }
 
 body {
-    background-color: rgb(125, 189, 249);
+    /* background-color: rgb(125, 189, 249); */
+    background-color: white;
     font-family: Poppins;
 }
 
@@ -28,25 +29,6 @@ body {
     color: black;
 }
 
-.light {
-    background-color: rgb(125, 189, 249);
-    color: black;
-}
-
-.light .card {
-    background-color: white;
-    color: black;
-}
-
-.dark .card {
-    background-color: darkblue;
-    color: white;
-}
-
-.dark {
-    background-color: rgb(7, 59, 230);
-    color: white;
-}
 
 .pagination {
     display: flex;
@@ -274,7 +256,9 @@ h3 {
 }
 
 .colorPicker {
-    float: right;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .colorPicker input[type="radio"] {
