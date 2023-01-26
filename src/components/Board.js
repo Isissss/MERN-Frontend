@@ -9,7 +9,7 @@ export function Board(props) {
     const BASE_URL = 'https://prg06.iettech.nl/cards';
     const theme = useContext(themeContext);
 
-    const test = (result) => {
+    const onDragEnd = (result) => {
         if (!result.destination) return;
 
         // Remove card from source list and move to destination list
@@ -29,11 +29,12 @@ export function Board(props) {
             .catch((err) => console.log(err));
     }
 
-    return <DragDropContext onDragEnd={test}>   <div className={`board ${theme}`}>
-        {lists.map((value, index) => (
-            <List cards={lists[index]} key={value._id} cardRefreshHandler={() => props.cardRefreshHandler()} />
-        ))}
-        <NewListButton cardRefreshHandler={props.cardRefreshHandler} />
-    </div>
+    return <DragDropContext onDragEnd={onDragEnd}>
+        <div className={`board ${theme}`}>
+            {lists.map((value, index) => (
+                <List cards={lists[index]} key={value._id} cardRefreshHandler={() => props.cardRefreshHandler()} />
+            ))}
+            <NewListButton cardRefreshHandler={props.cardRefreshHandler} />
+        </div>
     </DragDropContext>
 }

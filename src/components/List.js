@@ -31,8 +31,8 @@ export function List(props) {
                             index={index}
                             key={value._id}
                             cardRefreshHandler={props.cardRefreshHandler}
-                        >
-                        </Card>
+                        />
+
                     ))}
                         {provided.placeholder}
                     </div>

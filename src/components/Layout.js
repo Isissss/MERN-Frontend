@@ -7,7 +7,6 @@ export function Layout(props) {
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? JSON.parse(localStorage.getItem("theme")) : "blue");
 
     useEffect(() => {
-        // storing input name
         localStorage.setItem("theme", JSON.stringify(theme));
     }, [theme]);
 

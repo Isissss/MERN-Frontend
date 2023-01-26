@@ -1,14 +1,12 @@
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
-import { themeContext } from "../Layout";
 import { useContext, useState, useEffect } from "react";
 
 
 export function CardDetail(props) {
     const params = useParams();
     const [card, setCard] = useState(null);
-    const theme = useContext(themeContext);
     const BASE_URL = 'https://prg06.iettech.nl/cards';
     const navigate = useNavigate();
 
@@ -38,12 +36,14 @@ export function CardDetail(props) {
                     <Modal.Title> {card.title} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <b> Description: </b> <span className="text-break" >{card.body} </span> <br />
+                    <b> Description: </b> <span className="text-break"> {card.body} </span> <br /> <br /> <br />
+                    <b> Category: </b>{card.category} <br />
                     <b> Severity: </b> {card.severity} <br />
-                    <b> Category: </b>{card.category}
+                    <b> Location: </b> {card.location}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Link to={`/cards/${card._id}/edit`} className={` btn btn-primary `}>Edit card</Link>  </Modal.Footer>
+                    <Link to={`/cards/${card._id}/edit`} className="btn btn-primary">Edit card</Link>
+                </Modal.Footer>
             </Modal>
         </>
     )
