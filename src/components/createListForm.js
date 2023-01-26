@@ -24,7 +24,6 @@ export function CreateListForm(props) {
             .catch((err) => console.log(err));
     };
 
-
     function onChangeHandler(e) {
         setList({ ...list, [e.target.name]: e.target.value });
     }
