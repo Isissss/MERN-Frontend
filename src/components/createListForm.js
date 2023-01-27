@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import { CloseButton, Form, Button } from "react-bootstrap";
-import { themeContext } from "./Layout";
 
 export function CreateListForm(props) {
     const inputRef = useRef();

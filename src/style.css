@@ -11,8 +11,6 @@ body {
     font-family: Poppins;
 }
 
-
-
 .delete-btn {
     float: right;
     padding-right: 15px;
@@ -21,14 +19,10 @@ body {
     color: rgb(38, 46, 46);
 }
 
-.card-title {
-    font-size: 16px !important;
-}
 
 .delete-btn:hover {
     color: black;
 }
-
 
 .pagination {
     display: flex;
@@ -46,71 +40,6 @@ body {
     background: var(--clr-body-bg);
     color: var(--clr-text);
     max-height: calc(98vh - var(--headerHeight) - 50px);
-}
-
-
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 8px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-span {
-    vertical-align: middle !important;
-    align-self: baseline !important;
-
-}
-
-.btn-newList {
-    display: flex;
-    width: 242px;
-    flex-direction: column;
-    margin: 5px;
-
-}
-
-h3 {
-    padding: 0;
-    margin: 0;
-    align-self: center;
-}
-
-.error {
-    color: red;
-    position: absolute;
-    bottom: 0;
-    margin: 5px;
-    width: 700px;
-    font-weight: bold;
-    left: 0;
-}
-
-.board {
-    display: flex;
-    flex-direction: row;
-    padding-top: 20px;
-    overflow-x: auto;
-    padding: 20px 0 0 10px;
-    background-color: var(--clr-board);
-    height: calc(100vh - var(--headerHeight))
 }
 
 
@@ -138,6 +67,67 @@ h3 {
     font-weight: bold;
 
     margin: 0 4px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+span {
+    vertical-align: middle !important;
+    align-self: baseline !important;
+}
+
+.btn-newList {
+    display: flex;
+    width: 242px;
+    flex-direction: column;
+    margin: 5px;
+}
+
+h3 {
+    padding: 0;
+    margin: 0;
+    align-self: center;
+}
+
+.error {
+    color: red;
+    position: absolute;
+    bottom: 0;
+    margin: 5px;
+    width: 700px;
+    font-weight: bold;
+    left: 0;
+}
+
+.board {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    overflow-x: auto;
+    padding: 20px 0 0 10px;
+    background-color: var(--clr-board);
+    height: calc(100vh - var(--headerHeight))
 }
 
 .btn-newCard {
@@ -171,6 +161,10 @@ h3 {
     width: 242px;
 }
 
+.card-title {
+    font-size: 16px !important;
+}
+
 .card-header {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -201,16 +195,6 @@ h3 {
     z-index: 0;
 }
 
-/* .card {
-    background-color: darkblue;
-    color: white;
-} */
-
-.card-light {
-    background-color: white;
-    color: black;
-}
-
 .btn-delete {
     background-color: rgba(255, 0, 0, 0.808);
     border: none;
@@ -231,25 +215,6 @@ h3 {
     background-color: rgba(255, 0, 0, 0.808);
 }
 
-.btn-main {
-    background-color: rgba(112, 112, 112, 0.808);
-    border: none;
-    margin-left: 3px;
-    padding: 8px;
-    color: white;
-    text-align: center;
-    display: inline-block;
-    font-size: 13px;
-    border-radius: 5px;
-}
-
-.btn-main:hover {
-    background-color: rgba(87, 87, 87, 0.808);
-}
-
-.btn-main:active {
-    background-color: rgba(112, 112, 112, 0.808);
-}
 
 .btn-group {
     margin-left: 1em;
@@ -288,39 +253,6 @@ h3 {
 }
 
 
-
-.loadingSpinnerContainer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 5000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.loadingSpinner {
-    width: 64px;
-    height: 64px;
-    border: 8px solid;
-    border-color: #000 transparent #555 transparent;
-    border-radius: 50%;
-    animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 :root {
     --clr-body-bg: hsl(0 0% 90%);
     --clr-card-bg: hsl(0 0% 100%);
@@ -339,17 +271,6 @@ h3 {
     padding: 0 20px;
 }
 
-.colorSelector {
-    display: flex;
-    flex-direction: row;
-}
-
-.colorSelector input[type=radio] {
-    border: 0px;
-    width: 100%;
-    height: 2em;
-    accent-color: var(--clr-body-bg);
-}
 
 .blue {
     --clr-body-bg: hsl(209 50% 90%);

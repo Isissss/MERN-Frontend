@@ -13,7 +13,7 @@ import { BoardLayout } from './components/BoardLayout';
 export const ThemaContext = React.createContext();
 
 export function App() {
-    const [board, setBoard] = useState([]);
+    const [lists, setLists] = useState([]);
     const [pagination, setPagination] = useState([]);
     const [url, setUrl] = useState('https://prg06.iettech.nl/lists');
 
@@ -32,7 +32,7 @@ export function App() {
     useEffect(loadBoard, [url]);
 
     const handleResponse = (data) => {
-        setBoard(data.items);
+        setLists(data.items);
         setPagination(data.pagination);
     }
 
@@ -40,10 +40,10 @@ export function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route path="/cards" element={<BoardLayout lists={board} pagination={pagination} cardRefreshHandler={() => loadBoard()} changePageHandler={setUrl} />}>
-                        <Route path=":id/create" element={<CreateCard lists={board} cardRefreshHandler={() => loadBoard()} />} />
-                        <Route path=":id/edit" element={<EditCard lists={board} cardRefreshHandler={() => loadBoard()} />} />
-                        <Route path=":id" element={<CardDetail lists={board} cardRefreshHandler={() => loadBoard()} />} />
+                    <Route path="/cards" element={<BoardLayout lists={lists} pagination={pagination} cardRefreshHandler={() => loadBoard()} changePageHandler={setUrl} />}>
+                        <Route path=":id/create" element={<CreateCard lists={lists} cardRefreshHandler={() => loadBoard()} />} />
+                        <Route path=":id/edit" element={<EditCard lists={lists} cardRefreshHandler={() => loadBoard()} />} />
+                        <Route path=":id" element={<CardDetail lists={lists} cardRefreshHandler={() => loadBoard()} />} />
                     </Route>
                     <Route path="*" element={<Error />} />
                 </Route>

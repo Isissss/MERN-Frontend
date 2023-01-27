@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 
 export function CardDetail(props) {
