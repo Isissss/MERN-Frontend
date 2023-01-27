@@ -1,5 +1,5 @@
 
-# MERN Kanban board - front-end
+# MERN Kanban Board - Front-end
 
 This project was part of a course of the University of Applied Sciences Rotterdam. This is the front-end part for an API that we created. I chose to build a kanban board. 
 ## Tech Stack
