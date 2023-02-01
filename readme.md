@@ -38,7 +38,8 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd my-project/client
+  cd my-project/server
 ```
 
 Install dependencies
