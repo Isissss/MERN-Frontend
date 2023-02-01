@@ -50,6 +50,10 @@ Install dependencies
 Start the server
 
 ```bash
+  /cd my-project/server
+  npm run server
+
+  /cd my-project/client
   npm run start
 ```
 
