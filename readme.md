@@ -18,10 +18,10 @@ This was my first app using React. I have learned to:
 
 ## Future additions
 Due to the lack of time there are plenty of things that I was not able to implement. In the future I would like to add the following:
-- Live updates through Socket.IO 
-- Ability to add boards
-- Add indexes to list order and fix bug when dragging a card in the same list
-- Add an authentication system
+- [x] Live updates through Socket.IO 
+- [ ] Ability to add boards
+- [ ] Add indexes to list order and fix bug when dragging a card in the same list
+- [ ] Add an authentication system
 ## Screenshots
 
 ![App Screenshot](https://i.imgur.com/xGWhVTF.png)
