@@ -14,6 +14,7 @@ export function List(props) {
             },
         })
             .then((res) => props.cardRefreshHandler())
+            .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => console.log(err));
     };
 
@@ -29,6 +30,7 @@ export function List(props) {
                         <Card
                             card={value}
                             index={index}
+                            socket={props.socket}
                             key={value._id}
                             cardRefreshHandler={props.cardRefreshHandler}
                         />

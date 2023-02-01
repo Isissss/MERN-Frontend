@@ -20,6 +20,7 @@ export function CreateListForm(props) {
             .then((res) => props.cardRefreshHandler('https://prg06.iettech.nl/lists'))
             .then((res) => props.closeHandler())
             .then((res) => setList({ name: '' }))
+            .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => console.log(err));
     };
 

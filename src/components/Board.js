@@ -26,15 +26,16 @@ export function Board(props) {
             },
             body: JSON.stringify({ list_id: result.destination.droppableId })
         })
+            .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => console.log(err));
     }
 
     return <DragDropContext onDragEnd={onDragEnd}>
         <div className={`board ${theme}`}>
             {lists.map((value, index) => (
-                <List cards={lists[index]} key={value._id} cardRefreshHandler={() => props.cardRefreshHandler()} />
+                <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
             ))}
-            <NewListButton cardRefreshHandler={props.cardRefreshHandler} />
+            <NewListButton cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} />
         </div>
     </DragDropContext>
 }

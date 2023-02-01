@@ -48,6 +48,7 @@ export function CreateCard(props) {
         })
             .then((res) => props.cardRefreshHandler())
             .then((res) => handleClose())
+            .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => handleError(err));
     };
 

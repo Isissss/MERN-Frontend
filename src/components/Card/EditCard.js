@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
 export function EditCard(props) {
+    console.log(props)
     const params = useParams();
     const [card, setCard] = useState([]);
     const BASE_URL = 'https://prg06.iettech.nl/cards';
@@ -32,6 +33,7 @@ export function EditCard(props) {
             body: JSON.stringify(card)
         })
             .then((res) => props.cardRefreshHandler())
+            .then((res) => props.socket.emit("update", props.socket.id))
             .then((res) => goBack())
             .catch((err) => console.log(err));
     };
