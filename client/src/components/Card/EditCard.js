@@ -33,7 +33,7 @@ export function EditCard(props) {
             body: JSON.stringify(card)
         })
             .then((res) => props.cardRefreshHandler())
-            .then((res) => props.socket.emit("update", props.socket.id))
+            .then((res) => props.socket.emit("update"))
             .then((res) => goBack())
             .catch((err) => console.log(err));
     };

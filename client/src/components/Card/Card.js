@@ -14,7 +14,7 @@ export function Card(props) {
       },
     })
       .then((res) => props.cardRefreshHandler())
-      .then((res) => props.socket.emit("update", props.socket.id))
+      .then((res) => props.socket.emit("update", card))
       .catch((err) => console.log(err));
   };
 
@@ -33,7 +33,7 @@ export function Card(props) {
               <p className="card-text">  {card.body}
                 <button className="btn-delete" style={{ zIndex: 1000, position: "relative" }} onClick={deleteCard}> Delete </button>
               </p>
-              <Link to={`/cards/${card._id}`} className="btn btn-link stretched-link" />
+              <Link to={`c/${card._id}`} className="btn btn-link stretched-link" />
             </div>
           </div>
         )

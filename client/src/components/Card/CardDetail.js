@@ -24,7 +24,7 @@ export function CardDetail(props) {
     useEffect(cardCall, []);
 
     function handleClose() {
-        navigate("/cards", { replace: true })
+        navigate("/board", { replace: true })
     }
 
     if (!card) { return console.log("Loading") }

@@ -10,7 +10,7 @@ export function Board(props) {
     const theme = useContext(themeContext);
 
     const onDragEnd = (result) => {
-        if (!result.destination) return;
+        if (!result.destination || result.destination.droppableId == result.source.droppableId) return;
 
         // Remove card from source list and move to destination list
         const index = lists.findIndex(x => x._id === result.source.droppableId)
