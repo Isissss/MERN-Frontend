@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { ErrorPopup } from "../ErrorPopup";
-
-export function CreateCard(props) {
+import { useOutletContext } from "react-router-dom";
+export function CreateCard(props, outletProps) {
     const [error, setError] = useState(false);
-    
+    const boardCallFunc = useOutletContext();
     const navigate = useNavigate();
     const params = useParams();
-  
+
     function handleClose() {
         navigate(`/board/${params.id}`, { replace: true })
     }
@@ -46,7 +46,7 @@ export function CreateCard(props) {
             },
             body: JSON.stringify(card)
         })
-            .then((res) => props.cardRefreshHandler(params.id))
+            .then((res) => boardCallFunc())
             .then((res) => handleClose())
             .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => handleError(err));
