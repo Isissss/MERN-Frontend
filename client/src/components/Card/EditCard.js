@@ -2,16 +2,17 @@ import { Button, Form, Modal } from "react-bootstrap"
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 export function EditCard(props) {
-    console.log(props)
     const params = useParams();
     const [card, setCard] = useState([]);
     const BASE_URL = 'https://prg06.iettech.nl/cards';
     const navigate = useNavigate();
+    const boardCallFunc = useOutletContext();
 
     const cardCall = () => {
-        fetch(`${BASE_URL}/${params.id}`, {
+        fetch(`${BASE_URL}/${params.cardId}`, {
             headers: {
                 Accept: 'application/json',
             },
@@ -24,7 +25,7 @@ export function EditCard(props) {
     useEffect(cardCall, []);
 
     const EditCard = (e) => {
-        fetch(`${BASE_URL}/${params.id}`, {
+        fetch(`${BASE_URL}/${params.cardId}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -32,7 +33,7 @@ export function EditCard(props) {
             },
             body: JSON.stringify(card)
         })
-            .then((res) => props.cardRefreshHandler())
+            .then((res) => boardCallFunc())
             .then((res) => props.socket.emit("update"))
             .then((res) => goBack())
             .catch((err) => console.log(err));
@@ -50,7 +51,7 @@ export function EditCard(props) {
 
     }
     const goBack = () => {
-        navigate(`/cards/${params.id}`, { replace: true })
+        navigate(`/board/${params.id}/card/${params.cardId}`, { replace: true })
     }
 
     return <div>

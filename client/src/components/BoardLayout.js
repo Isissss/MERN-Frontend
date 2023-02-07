@@ -1,12 +1,14 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useOutletContext } from "react-router-dom";
 import { Board } from "./Board";
+import { useState, useEffect } from 'react';
 import { Pagination } from './Pagination';
-import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+
 export function BoardLayout(props) {
     const params = useParams()
-    const [board, setBoard] = useState([])
-    const [loading, setLoading] = useState(true)
-    const boardCall = () => {
+    const [board, setBoard] = useState([]);
+
+    const boardCallFunc = () => {
         fetch(`https://prg06.iettech.nl/boards/${params.id}`, {
             method: 'get',
             headers: {
@@ -14,21 +16,15 @@ export function BoardLayout(props) {
             },
         })
             .then((data) => data.json())
-            .then((data) => setBoard(data[0]))
-            .then(() => setLoading(false))
+            .then((data) => setBoard(data))
             .catch((error) => console.log(error));
-    
-    };
-
-    useEffect(boardCall, []);
-   
-    return loading ? <div>Loading...</div> :  
-     <div>
+    }
+    useEffect(boardCallFunc, []);
+    return <div>
         <div>
-            <Board lists={board} socket={props.socket}  cardRefreshHandler={() => boardCall()} />
-            <Outlet />
+            <Board board={board[0]} socket={props.socket} cardRefreshHandler={() => boardCallFunc()} />
+            {/* <Pagination pagination={props.pagination} changePageHandler={props.changePageHandler} /> */}
+            <Outlet context={() => boardCallFunc()} />
         </div>
     </div >
-
-    
 }   

@@ -1,7 +1,7 @@
 
 import { BoardList } from "../components/Board/BoardList"
 
-export function Home() {
+export function Home(props) {
 
     return <div>
         <h1>

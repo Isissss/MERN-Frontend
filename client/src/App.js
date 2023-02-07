@@ -20,11 +20,10 @@ export const ThemaContext = React.createContext();
 export function App() {
     const params = useParams()
     const [lists, setLists] = useState([]);
-    const [pagination, setPagination] = useState([]);
     const id = `https://prg06.iettech.nl/boards/${params.id}`;
 
     const [url, setUrl] = useState(id);
-
+    const [board, setBoard] = useState([])
     useEffect(() => {
         socket.on('sendUpdate', () => {
             loadBoard();
@@ -37,10 +36,12 @@ export function App() {
         };
     }, []);
 
-    const loadBoard = (board) => {
-        if (!board) return
+    const loadBoard = (t) => {
+        console.log(t)
+        if (!t) return
 
-        fetch(`https://prg06.iettech.nl/boards/${board}`, {
+
+        fetch(`https://prg06.iettech.nl/boards/${t}`, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
@@ -51,26 +52,23 @@ export function App() {
             .catch((error) => console.log(error));
 
     };
-    useEffect(loadBoard, [url]);
+
+    useEffect(loadBoard, []);
 
     const handleResponse = (data) => {
-        setLists(data.items);
-        setPagination(data.pagination);
+        setBoard(data[0]._id);
     }
-
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route path="/" element={<Home />} />
-                    // Board
-                    <Route path="board/:id" element={<BoardLayout board={lists} pagination={pagination} socket={socket} cardRefreshHandler={() => loadBoard()} changePageHandler={setUrl} />}>
-                        <Route path="list/:listId/create" element={<CreateCard lists={lists} socket={socket} cardRefreshHandler = {loadBoard} />} />
-                        <Route path=":cardId/edit" element={<EditCard lists={lists} socket={socket} cardRefreshHandler={() => loadBoard()} />} />
-                        <Route path="card/:cardId" element={<CardDetail lists={lists} cardRefreshHandler={() => loadBoard()} />} />
+                    <Route path="/" index element={<Home />} />
+                    <Route path="board/:id" element={<BoardLayout board={board} socket={socket} setBoard={() => loadBoard()} />}>
+                        <Route path="list/:listId/create" element={<CreateCard socket={socket} />} />
+                        <Route path="card/:cardId/edit" element={<EditCard board={lists} socket={socket} />} />
+                        <Route path="card/:cardId" element={<CardDetail board={lists} />} />
                     </Route>
-
                     <Route path="*" element={<Error />} />
                 </Route>
             </Routes>

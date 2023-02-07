@@ -5,10 +5,12 @@ import { NewListButton } from "./NewListButton";
 import { DragDropContext } from "react-beautiful-dnd";
 
 export function Board(props) {
-    const lists = props.lists.lists
+    if (!props.board) return
+
+    const lists = props.board.lists
     const theme = useContext(themeContext)
     const BASE_URL = 'https://prg06.iettech.nl/cards';
- 
+
     const onDragEnd = (result) => {
         if (!result.destination || result.destination.droppableId == result.source.droppableId) return;
 
@@ -26,16 +28,16 @@ export function Board(props) {
             },
             body: JSON.stringify({ list_id: result.destination.droppableId })
         })
-            .then((res) => props.socket.emit("update", props.socket.id))
+            // .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => console.log(err));
     }
 
-    return  <DragDropContext onDragEnd={onDragEnd}>
+    return <DragDropContext onDragEnd={onDragEnd}>
         <div className={`board ${theme}`}>
             {lists.map((value, index) => (
                 <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
             ))}
-            <NewListButton boardId={props.lists._id} cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} />
+            <NewListButton boardId={props.board._id} cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} />
         </div>
-    </DragDropContext> 
+    </DragDropContext>
 }

@@ -42,7 +42,7 @@ export function CardDetail(props) {
                     <b> Location: </b> {card.location}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Link to={`/cards/${card._id}/edit`} className="btn btn-primary">Edit card</Link>
+                    <Link to={`edit`} className="btn btn-primary">Edit card</Link>
                 </Modal.Footer>
             </Modal>
         </>
