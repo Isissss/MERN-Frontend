@@ -33,7 +33,7 @@ export function Card(props) {
               <p className="card-text">  {card.body}
                 <button className="btn-delete" style={{ zIndex: 1000, position: "relative" }} onClick={deleteCard}> Delete </button>
               </p>
-              <Link to={`c/${card._id}`} className="btn btn-link stretched-link" />
+              <Link to={`card/${card._id}`} className="btn btn-link stretched-link" />
             </div>
           </div>
         )

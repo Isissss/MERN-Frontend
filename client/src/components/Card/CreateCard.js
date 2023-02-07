@@ -6,12 +6,12 @@ import { ErrorPopup } from "../ErrorPopup";
 
 export function CreateCard(props) {
     const [error, setError] = useState(false);
-
+    
     const navigate = useNavigate();
     const params = useParams();
-
+  
     function handleClose() {
-        navigate("/cards", { replace: true })
+        navigate(`/board/${params.id}`, { replace: true })
     }
 
     const [card, setCard] = useState({
@@ -21,7 +21,7 @@ export function CreateCard(props) {
         severity: '',
         location: '',
         category: '',
-        list_id: params.id
+        list_id: params.listId
     });
 
     function onChangeHandler(e) {
@@ -46,7 +46,7 @@ export function CreateCard(props) {
             },
             body: JSON.stringify(card)
         })
-            .then((res) => props.cardRefreshHandler())
+            .then((res) => props.cardRefreshHandler(params.id))
             .then((res) => handleClose())
             .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => handleError(err));

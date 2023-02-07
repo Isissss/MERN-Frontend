@@ -41,7 +41,7 @@ export function List(props) {
                 )}
             </Droppable>
             <div className="list-footer">
-                <Link className="btn btn-primary btn-newCard" to={`/cards/${props.cards._id}/create`}>New Card</Link>
+                <Link className="btn btn-primary btn-newCard" to={`list/${props.cards._id}/create`}>New Card</Link>
             </div>
         </div>
     </div>

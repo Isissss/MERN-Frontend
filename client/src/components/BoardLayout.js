@@ -1,26 +1,34 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { Board } from "./Board";
 import { Pagination } from './Pagination';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
 export function BoardLayout(props) {
     const params = useParams()
-    console.log(params);
+    const [board, setBoard] = useState([])
+    const [loading, setLoading] = useState(true)
+    const boardCall = () => {
+        fetch(`https://prg06.iettech.nl/boards/${params.id}`, {
+            method: 'get',
+            headers: {
+                Accept: 'application/json',
+            },
+        })
+            .then((data) => data.json())
+            .then((data) => setBoard(data[0]))
+            .then(() => setLoading(false))
+            .catch((error) => console.log(error));
+    
+    };
 
-    fetch(`https://prg06.iettech.nl/boards/${params.id}`, {
-        method: 'get',
-        headers: {
-            Accept: 'application/json',
-        },
-    })
-        .then((data) => data.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log(error));
-
-    return <div>
+    useEffect(boardCall, []);
+   
+    return loading ? <div>Loading...</div> :  
+     <div>
         <div>
-            <Board lists={props.lists} socket={props.socket} refreshLists={props.refreshLists} cardRefreshHandler={() => props.cardRefreshHandler()} />
-            <Pagination pagination={props.pagination} changePageHandler={props.changePageHandler} />
+            <Board lists={board} socket={props.socket}  cardRefreshHandler={() => boardCall()} />
             <Outlet />
         </div>
     </div >
+
+    
 }   

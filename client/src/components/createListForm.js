@@ -3,7 +3,7 @@ import { CloseButton, Form, Button } from "react-bootstrap";
 
 export function CreateListForm(props) {
     const inputRef = useRef();
-    const [list, setList] = useState({ name: '' });
+    const [list, setList] = useState({ name: '', board_id: props.boardId });
     useEffect(() => { inputRef.current.focus() }, []);
 
     const createList = (e) => {
@@ -17,7 +17,7 @@ export function CreateListForm(props) {
             },
             body: JSON.stringify(list)
         })
-            .then((res) => props.cardRefreshHandler('https://prg06.iettech.nl/lists'))
+            .then((res) => props.cardRefreshHandler())
             .then((res) => props.closeHandler())
             .then((res) => setList({ name: '' }))
             .then((res) => props.socket.emit("update", props.socket.id))

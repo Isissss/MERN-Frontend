@@ -5,10 +5,10 @@ import { NewListButton } from "./NewListButton";
 import { DragDropContext } from "react-beautiful-dnd";
 
 export function Board(props) {
-    const lists = props.lists
+    const lists = props.lists.lists
+    const theme = useContext(themeContext)
     const BASE_URL = 'https://prg06.iettech.nl/cards';
-    const theme = useContext(themeContext);
-
+ 
     const onDragEnd = (result) => {
         if (!result.destination || result.destination.droppableId == result.source.droppableId) return;
 
@@ -30,12 +30,12 @@ export function Board(props) {
             .catch((err) => console.log(err));
     }
 
-    return <DragDropContext onDragEnd={onDragEnd}>
+    return  <DragDropContext onDragEnd={onDragEnd}>
         <div className={`board ${theme}`}>
             {lists.map((value, index) => (
                 <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
             ))}
-            <NewListButton cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} />
+            <NewListButton boardId={props.lists._id} cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} />
         </div>
-    </DragDropContext>
+    </DragDropContext> 
 }

@@ -11,7 +11,7 @@ export function CardDetail(props) {
     const navigate = useNavigate();
 
     const cardCall = () => {
-        fetch(`${BASE_URL}/${params.id}`, {
+        fetch(`${BASE_URL}/${params.cardId}`, {
             headers: {
                 Accept: 'application/json',
             },
@@ -24,7 +24,7 @@ export function CardDetail(props) {
     useEffect(cardCall, []);
 
     function handleClose() {
-        navigate("/board", { replace: true })
+        navigate(`/board/${params.id}`, { replace: true })
     }
 
     if (!card) { return console.log("Loading") }
