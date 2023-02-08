@@ -20,7 +20,7 @@ export function CreateListForm(props) {
             .then((res) => props.cardRefreshHandler())
             .then((res) => props.closeHandler())
             .then((res) => setList({ name: '' }))
-            .then((res) => props.socket.emit("update", props.socket.id))
+            .then((res) => props.socket.emit("hello"))
             .catch((err) => console.log(err));
     };
 

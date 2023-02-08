@@ -11,13 +11,12 @@ import { CreateCard } from './components/Card/CreateCard';
 import { BoardLayout } from './components/BoardLayout';
 import io from 'socket.io-client';
 
-
-const socket = io.connect('http://localhost:3000');
-
 export const ThemaContext = React.createContext();
 
 
 export function App() {
+    
+const socket = io.connect('http://localhost:3000');
     const params = useParams()
     const [lists, setLists] = useState([]);
     const id = `https://prg06.iettech.nl/boards/${params.id}`;
@@ -25,10 +24,7 @@ export function App() {
     const [url, setUrl] = useState(id);
     const [board, setBoard] = useState([])
     useEffect(() => {
-        socket.on('sendUpdate', () => {
-            loadBoard();
-        });
-
+    
         return () => {
             socket.off('sendUpdate');
             socket.off('connect');
@@ -37,7 +33,7 @@ export function App() {
     }, []);
 
     const loadBoard = (t) => {
-        console.log(t)
+        console.log('update')
         if (!t) return
 
 
@@ -53,8 +49,7 @@ export function App() {
 
     };
 
-    useEffect(loadBoard, []);
-
+ 
     const handleResponse = (data) => {
         setBoard(data[0]._id);
     }
@@ -64,7 +59,7 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" index element={<Home />} />
-                    <Route path="board/:id" element={<BoardLayout board={board} socket={socket} setBoard={() => loadBoard()} />}>
+                    <Route path="board/:id" element={<BoardLayout socket={socket} setBoard={() => loadBoard()} />}>
                         <Route path="list/:listId/create" element={<CreateCard socket={socket} />} />
                         <Route path="card/:cardId/edit" element={<EditCard board={lists} socket={socket} />} />
                         <Route path="card/:cardId" element={<CardDetail board={lists} />} />

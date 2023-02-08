@@ -3,10 +3,11 @@ import { Board } from "./Board";
 import { useState, useEffect } from 'react';
 import { Pagination } from './Pagination';
 import { useParams } from 'react-router-dom';
-
+ 
 export function BoardLayout(props) {
     const params = useParams()
     const [board, setBoard] = useState([]);
+   
 
     const boardCallFunc = () => {
         fetch(`https://prg06.iettech.nl/boards/${params.id}`, {
@@ -20,6 +21,12 @@ export function BoardLayout(props) {
             .catch((error) => console.log(error));
     }
     useEffect(boardCallFunc, []);
+
+    props.socket.on('update', () => {
+        boardCallFunc();
+        console.log('update')
+    });
+
     return <div>
         <div>
             <Board board={board[0]} socket={props.socket} cardRefreshHandler={() => boardCallFunc()} />

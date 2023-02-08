@@ -1,11 +1,17 @@
 import { List } from "./List";
 import { themeContext } from "./Layout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NewListButton } from "./NewListButton";
 import { DragDropContext } from "react-beautiful-dnd";
 
 export function Board(props) {
     if (!props.board) return
+
+     function boardCallFunc() {
+        props.socket.emit("joinroom", props.board._id)
+    }
+    boardCallFunc()
+
 
     const lists = props.board.lists
     const theme = useContext(themeContext)
@@ -28,7 +34,7 @@ export function Board(props) {
             },
             body: JSON.stringify({ list_id: result.destination.droppableId })
         })
-            // .then((res) => props.socket.emit("update", props.socket.id))
+            .then(() =>  props.socket.emit("hello", props.board._id))
             .catch((err) => console.log(err));
     }
 

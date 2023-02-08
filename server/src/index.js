@@ -17,12 +17,28 @@ const io = new Server(server, {
 
 
 io.on("connection", (socket) => {
+ 
     console.log(`User Connected: ${socket.id}`);
 
-    socket.on("update", () => {
-        socket.broadcast.emit("sendUpdate");
-        console.log("update");
+    socket.on("joinroom", (data) => {
+        socket.leave(socket.rooms)
+        socket.join(data);
+        console.log(socket.rooms)
+        console.log(`User Joined Room: ${data}`);
     });
+
+    
+    socket.on("hello", (data) => {
+        // socket.join(room);
+        console.log(data);
+        socket.to(data).emit("update");
+    });
+
+    // socket.on("update", () => {
+    //     console.log(socket.room)
+    //     socket.broadcast.emit("sendUpdate");
+    //     console.log("update");
+    // });
 
     socket.on("disconnect", () => {
         console.log(`User Disconnected: ${socket.id}`);
