@@ -34,7 +34,7 @@ export function EditCard(props) {
             body: JSON.stringify(card)
         })
             .then((res) => boardCallFunc())
-            .then((res) => props.socket.emit("update"))
+            .then((res) => props.socket.emit("sendUpdate", props.socket.id))
             .then((res) => goBack())
             .catch((err) => console.log(err));
     };

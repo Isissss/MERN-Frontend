@@ -12,18 +12,6 @@ export function BoardList() {
             setBoards(res.data.items);
         }).catch((err) => console.log(err));
 
-
-        // fetch(BASE_URL, {
-        //     method: 'get',
-        //     headers: {
-        //         Accept: 'application/json',
-        //     },
-        // })
-        //     .then((data) => data.json())
-        //     .then((data) => console.log(data))
-        //     .then((data) => setBoards(data))
-        //     .catch((error) => console.log(error));
-
     }
 
     useEffect(() => {

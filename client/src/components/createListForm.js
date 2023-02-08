@@ -18,9 +18,9 @@ export function CreateListForm(props) {
             body: JSON.stringify(list)
         })
             .then((res) => props.cardRefreshHandler())
+            .then((res) => props.socket.emit("sendUpdate", props.board_id))
             .then((res) => props.closeHandler())
             .then((res) => setList({ name: '' }))
-            .then((res) => props.socket.emit("hello"))
             .catch((err) => console.log(err));
     };
 

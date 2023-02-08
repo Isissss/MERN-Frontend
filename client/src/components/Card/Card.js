@@ -14,7 +14,7 @@ export function Card(props) {
       },
     })
       .then((res) => props.cardRefreshHandler())
-      .then((res) => props.socket.emit("update", card))
+      .then((res) => props.socket.emit("sendUpdate"))
       .catch((err) => console.log(err));
   };
 

@@ -15,8 +15,8 @@ export const ThemaContext = React.createContext();
 
 
 export function App() {
-    
-const socket = io.connect('http://localhost:3000');
+
+    const socket = io.connect('http://localhost:3000');
     const params = useParams()
     const [lists, setLists] = useState([]);
     const id = `https://prg06.iettech.nl/boards/${params.id}`;
@@ -24,15 +24,20 @@ const socket = io.connect('http://localhost:3000');
     const [url, setUrl] = useState(id);
     const [board, setBoard] = useState([])
     useEffect(() => {
-    
+        socket.on('joinroom', (data) => {
+            console.log(data);
+        });
         return () => {
+            socket.off('update');
+            socket.off('sendUpdate');
+            socket.off('hoi');
             socket.off('sendUpdate');
             socket.off('connect');
             socket.off('disconnect');
         };
     }, []);
 
-    const loadBoard = (t) => {
+    const loadBoard = async (t) => {
         console.log('update')
         if (!t) return
 
@@ -49,7 +54,7 @@ const socket = io.connect('http://localhost:3000');
 
     };
 
- 
+
     const handleResponse = (data) => {
         setBoard(data[0]._id);
     }

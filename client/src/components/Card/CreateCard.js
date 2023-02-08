@@ -48,7 +48,7 @@ export function CreateCard(props, outletProps) {
         })
             .then((res) => boardCallFunc())
             .then((res) => handleClose())
-            .then((res) => props.socket.emit("update", props.socket.id))
+            .then((res) => props.socket.emit("sendUpdate", props.socket.id))
             .catch((err) => handleError(err));
     };
 

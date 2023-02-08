@@ -5,9 +5,8 @@ export function Home(props) {
 
     return <div>
         <h1>
-            Hooooooooi
+            Boards
         </h1>
-
         <BoardList />
     </div>
 }

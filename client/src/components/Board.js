@@ -7,12 +7,6 @@ import { DragDropContext } from "react-beautiful-dnd";
 export function Board(props) {
     if (!props.board) return
 
-     function boardCallFunc() {
-        props.socket.emit("joinroom", props.board._id)
-    }
-    boardCallFunc()
-
-
     const lists = props.board.lists
     const theme = useContext(themeContext)
     const BASE_URL = 'https://prg06.iettech.nl/cards';
@@ -34,7 +28,7 @@ export function Board(props) {
             },
             body: JSON.stringify({ list_id: result.destination.droppableId })
         })
-            .then(() =>  props.socket.emit("hello", props.board._id))
+            .then(() => props.socket.emit("sendUpdate", props.board._id))
             .catch((err) => console.log(err));
     }
 

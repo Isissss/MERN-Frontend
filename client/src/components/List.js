@@ -13,8 +13,8 @@ export function List(props) {
                 Accept: 'application/json',
             },
         })
+            .then((res) => props.socket.emit("sendUpdate", props.board_id))
             .then((res) => props.cardRefreshHandler())
-            .then((res) => props.socket.emit("update", props.socket.id))
             .catch((err) => console.log(err));
     };
 
