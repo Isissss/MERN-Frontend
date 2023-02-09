@@ -37,7 +37,7 @@ export function Board(props) {
             {lists.map((value, index) => (
                 <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
             ))}
-            <NewListButton boardId={props.board._id} cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} />
+            <NewListButton boardId={props.board._id} cardRefreshHandler={() => props.cardRefreshHandler()} socket={props.socket} />
         </div>
     </DragDropContext>
 }

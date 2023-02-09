@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { ErrorPopup } from "../ErrorPopup";
 import { useOutletContext } from "react-router-dom";
-export function CreateCard(props, outletProps) {
+export function CreateCard(props) {
     const [error, setError] = useState(false);
     const boardCallFunc = useOutletContext();
     const navigate = useNavigate();
     const params = useParams();
-
+ 
     function handleClose() {
         navigate(`/board/${params.id}`, { replace: true })
     }
@@ -48,7 +48,7 @@ export function CreateCard(props, outletProps) {
         })
             .then((res) => boardCallFunc())
             .then((res) => handleClose())
-            .then((res) => props.socket.emit("sendUpdate", props.socket.id))
+            .then((res) => props.socket.emit("sendUpdate", params.id))
             .catch((err) => handleError(err));
     };
 

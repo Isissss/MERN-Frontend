@@ -24,50 +24,46 @@ export function App() {
     const [url, setUrl] = useState(id);
     const [board, setBoard] = useState([])
     useEffect(() => {
-        socket.on('joinroom', (data) => {
-            console.log(data);
-        });
         return () => {
             socket.off('update');
-            socket.off('sendUpdate');
-            socket.off('hoi');
+            socket.on('joinroom');
             socket.off('sendUpdate');
             socket.off('connect');
             socket.off('disconnect');
         };
     }, []);
 
-    const loadBoard = async (t) => {
-        console.log('update')
-        if (!t) return
+    // const loadBoard = async (t) => {
+    //     console.log('update')
+    //     if (!t) return
 
 
-        fetch(`https://prg06.iettech.nl/boards/${t}`, {
-            method: 'get',
-            headers: {
-                Accept: 'application/json',
-            },
-        })
-            .then((data) => data.json())
-            .then((data) => handleResponse(data))
-            .catch((error) => console.log(error));
+    //     fetch(`https://prg06.iettech.nl/boards/${t}`, {
+    //         method: 'get',
+    //         headers: {
+    //             Accept: 'application/json',
+    //         },
+    //     })
+    //         .then((data) => data.json())
+    //         .then((data) => handleResponse(data))
+    //         .catch((error) => console.log(error));
 
-    };
+    // };
 
 
-    const handleResponse = (data) => {
-        setBoard(data[0]._id);
-    }
+    // const handleResponse = (data) => {
+    //     setBoard(data[0]._id);
+    // }
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" index element={<Home />} />
-                    <Route path="board/:id" element={<BoardLayout socket={socket} setBoard={() => loadBoard()} />}>
+                    <Route path="board/:id" element={<BoardLayout socket={socket} />}>
                         <Route path="list/:listId/create" element={<CreateCard socket={socket} />} />
-                        <Route path="card/:cardId/edit" element={<EditCard board={lists} socket={socket} />} />
-                        <Route path="card/:cardId" element={<CardDetail board={lists} />} />
+                        <Route path="card/:cardId/edit" element={<EditCard socket={socket} />} />
+                        <Route path="card/:cardId" element={<CardDetail />} />
                     </Route>
                     <Route path="*" element={<Error />} />
                 </Route>

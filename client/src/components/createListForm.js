@@ -18,7 +18,7 @@ export function CreateListForm(props) {
             body: JSON.stringify(list)
         })
             .then((res) => props.cardRefreshHandler())
-            .then((res) => props.socket.emit("sendUpdate", props.board_id))
+            .then((res) => props.socket.emit("sendUpdate", props.boardId))
             .then((res) => props.closeHandler())
             .then((res) => setList({ name: '' }))
             .catch((err) => console.log(err));

@@ -13,7 +13,7 @@ export function List(props) {
                 Accept: 'application/json',
             },
         })
-            .then((res) => props.socket.emit("sendUpdate", props.board_id))
+            .then((res) => props.socket.emit("sendUpdate", props.cards.board_id))
             .then((res) => props.cardRefreshHandler())
             .catch((err) => console.log(err));
     };
@@ -31,6 +31,7 @@ export function List(props) {
                             card={value}
                             index={index}
                             socket={props.socket}
+                            boardId={props.cards.board_id}
                             key={value._id}
                             cardRefreshHandler={props.cardRefreshHandler}
                         />
