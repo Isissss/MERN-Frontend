@@ -33,7 +33,9 @@ export function Board(props) {
     }
 
     return <DragDropContext onDragEnd={onDragEnd}>
+       
         <div className={`board ${theme}`}>
+        <small className="text-muted">{props.board.name}</small> 
             {lists.map((value, index) => (
                 <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
             ))}
