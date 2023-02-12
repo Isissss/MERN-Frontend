@@ -15,14 +15,12 @@ export const ThemaContext = React.createContext();
 
 
 export function App() {
+    const [lists, setLists] = useState([]);
+    const [board, setBoard] = useState([])
 
     const socket = io.connect('http://localhost:3000');
     const params = useParams()
-    const [lists, setLists] = useState([]);
-    const id = `https://prg06.iettech.nl/boards/${params.id}`;
 
-    const [url, setUrl] = useState(id);
-    const [board, setBoard] = useState([])
     useEffect(() => {
         return () => {
             socket.off('update');

@@ -1,25 +1,36 @@
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Board } from "./Board";
 import { useState, useEffect } from 'react';
-import { Pagination } from './Pagination';
 import { useParams } from 'react-router-dom';
 
 export function BoardLayout(props) {
     const params = useParams()
     const [board, setBoard] = useState([]);
+    const navigate = useNavigate();
+
+    const handleError = (error) => {
+        console.log(error);
+        navigate('/', { replace: true })
+    }
 
     const boardCallFunc = () => {
-        console.log('update')
         fetch(`https://prg06.iettech.nl/boards/${params.id}`, {
             method: 'get',
             headers: {
                 Accept: 'application/json',
             },
         })
+            .then(function (response) {
+                if (response.status !== 200) {
+                    handleError(response);
+                }
+                return response;
+            })
             .then((data) => data.json())
             .then((data) => setBoard(data))
-            .catch((error) => console.log(error));
+            .catch((err) => handleError(err));
     }
+
     useEffect(boardCallFunc, []);
 
     useEffect(() => {
@@ -27,6 +38,7 @@ export function BoardLayout(props) {
 
         props.socket.on('update', () => {
             boardCallFunc();
+
         });
 
         return () => {

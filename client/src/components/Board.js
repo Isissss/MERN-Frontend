@@ -12,13 +12,20 @@ export function Board(props) {
     const BASE_URL = 'https://prg06.iettech.nl/cards';
 
     const onDragEnd = (result) => {
-        if (!result.destination || result.destination.droppableId == result.source.droppableId) return;
+        if (!result.destination) return;
 
         // Remove card from source list and move to destination list
-        const index = lists.findIndex(x => x._id === result.source.droppableId)
-        const indexDest = lists.findIndex(x => x._id === result.destination.droppableId)
-        lists[indexDest].cards.splice(result.destination.index, 0, lists[index].cards[result.source.index])
-        lists[index].cards.splice(result.source.index, 1)
+        if (result.destination.droppableId !== result.source.droppableId) {
+            const index = lists.findIndex(x => x._id === result.source.droppableId)
+            const indexDest = lists.findIndex(x => x._id === result.destination.droppableId)
+            lists[indexDest].cards.splice(result.destination.index, 0, lists[index].cards[result.source.index])
+            lists[index].cards.splice(result.source.index, 1)
+        } else {
+            // Move card within list
+            const index = lists.findIndex(x => x._id === result.source.droppableId)
+            const [removed] = lists[index].cards.splice(result.source.index, 1);
+            lists[index].cards.splice(result.destination.index, 0, removed);
+        }
 
         fetch(`${BASE_URL}/${result.draggableId}`, {
             method: 'PUT',
@@ -33,9 +40,8 @@ export function Board(props) {
     }
 
     return <DragDropContext onDragEnd={onDragEnd}>
-       
+        <small className="text-muted">{props.board.name}</small>
         <div className={`board ${theme}`}>
-        <small className="text-muted">{props.board.name}</small> 
             {lists.map((value, index) => (
                 <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
             ))}

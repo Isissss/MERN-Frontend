@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
 h1,
 p {
     /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -42,11 +44,39 @@ body {
     max-height: calc(98vh - var(--headerHeight) - 50px);
 }
 
+.list-header form {
+    padding: 0;
+    margin: 0;
+    width: 30px;
+}
 
+.list-header input[type=text] {
+    width: 175px;
+    padding: 0;
+    margin: 0;
+    height: 25px;
+    box-shadow: none;
+    box-sizing: border-box;
+    border: 0;
+}
+
+.list-header input[type=text]:focus {
+    outline: none;
+    border-bottom: 2px solid var(--clr-heading);
+    background: rgba(0, 0, 0, 0.2);
+
+}
+
+.list-header span {
+    padding: 0;
+    margin: 0;
+    width: 175px;
+    display: inline-block;
+}
 
 .list-header {
     background: var(--clr-body-bg);
-
+    cursor: pointer;
     color: var(--clr-text);
     /* background-color: rgb(186, 218, 247); */
     max-width: 242px;
@@ -56,22 +86,19 @@ body {
     z-index: 0;
     font-weight: bold;
     padding: 8px 0 8px 9px;
-    /* //margin: 0 4px; */
 }
 
 .list-header:hover {
-    background-color: rgb(186, 218, 247);
+    background-color: var(--clr-body-bg);
 }
 
 .list-footer {
     background: var(--clr-body-bg);
-
     color: var(--clr-text);
     max-width: 242px;
     position: relative;
     z-index: 0;
     font-weight: bold;
-
     margin: 0 4px;
 }
 
@@ -133,7 +160,7 @@ h3 {
     overflow-x: auto;
     padding: 20px 0 0 10px;
     background-color: var(--clr-board);
-    height: calc(100vh - var(--headerHeight))
+    height: calc(100vh - var(--headerHeight) - 24px)
 }
 
 .btn-newCard {
@@ -147,6 +174,7 @@ h3 {
 
 }
 
+
 .btn-newCard:hover {
     background-color: var(--clr-heading) !important;
     border-color: var(--clr-heading) !important;
@@ -157,9 +185,9 @@ h3 {
     background: var(--clr-body-bg);
     color: var(--clr-text);
     margin: 0;
-    overflow-x: hidden;
+
     overflow-y: auto;
-    padding: 0 10px 0;
+    padding: 8px 10px 0 10px;
     vertical-align: top;
     white-space: nowrap;
     margin-bottom: 0;
