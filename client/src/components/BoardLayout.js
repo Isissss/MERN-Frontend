@@ -9,7 +9,6 @@ export function BoardLayout(props) {
     const navigate = useNavigate();
 
     const handleError = (error) => {
-        console.log(error);
         navigate('/', { replace: true })
     }
 
@@ -52,7 +51,6 @@ export function BoardLayout(props) {
     return <div>
         <div>
             <Board board={board[0]} socket={props.socket} cardRefreshHandler={() => boardCallFunc()} />
-            {/* <Pagination pagination={props.pagination} changePageHandler={props.changePageHandler} /> */}
             <Outlet context={boardCallFunc} />
         </div>
     </div >

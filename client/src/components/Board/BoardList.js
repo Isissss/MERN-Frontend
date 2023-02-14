@@ -20,12 +20,10 @@ export function BoardList() {
 
 
     return (
-        <div className="test">
+        <div className="board-list">
             {boards.map((value) => (
                 <BoardCard board={value} key={value._id} />
-
             ))}
-
         </div>
     );
 }

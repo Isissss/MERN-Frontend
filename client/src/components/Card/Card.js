@@ -29,8 +29,7 @@ export function Card(props) {
             {...provided.dragHandleProps}
           >
             <div className="card-body">
-              <h5 className="card-title"> {card.title} </h5>
-              <p className="card-text">  {card.body}
+              <p className="card-text">  {card.title}
                 <button className="btn-delete" style={{ zIndex: 1000, position: "relative" }} onClick={deleteCard}> Delete </button>
               </p>
               <Link to={`card/${card._id}`} className="btn btn-link stretched-link" />
