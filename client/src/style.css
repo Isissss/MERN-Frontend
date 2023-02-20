@@ -54,12 +54,11 @@ body {
     width: 175px;
     padding: 0;
     margin: 0;
-    height: 25px;
     box-shadow: none;
     box-sizing: border-box;
     border: 0;
 }
- 
+
 
 .list-header span {
     padding: 0;
@@ -78,13 +77,13 @@ body {
     font-size: 14px;
     font-weight: bold;
     padding: 5px 5px 5px 9px;
-  
+
 }
 
 .list-header:hover {
     background-color: var(--clr-body-bg);
 }
- 
+
 #list-title:hover {
     cursor: text;
 }
@@ -96,7 +95,7 @@ body {
     position: relative;
     z-index: 0;
     font-weight: bold;
-    margin: 0 4px;
+    margin: 0 0 0 4px;
 }
 
 /* width */
@@ -121,7 +120,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
- 
+
 
 .btn-newList {
     display: flex;
@@ -175,11 +174,11 @@ h3 {
 }
 
 .btn-newCard:active {
-    background: rgba(104, 104, 104, 0.327)!important;
-    border-color: transparent!important;
-    color: #172b4d!important;
+    background: rgba(104, 104, 104, 0.327) !important;
+    border-color: transparent !important;
+    color: #172b4d !important;
 }
- 
+
 .board-list {
     display: flex;
     flex-direction: column;
@@ -314,7 +313,7 @@ h3 {
 
 .blue {
     /* --clr-body-bg: hsl(209 50% 90%); */
-    --clr-body-bg:  #ebecf0;
+    --clr-body-bg: #ebecf0;
     --clr-card-bg: hsl(209 50% 100%);
     --clr-text: hsl(209 50% 15%);
     --clr-board: hsl(209 50% 15%);
@@ -325,7 +324,7 @@ h3 {
 
 .purple {
     /* --clr-body-bg: hsl(263, 90%, 88%); */
-    --clr-body-bg:  #ebecf0;
+    --clr-body-bg: #ebecf0;
     --clr-card-bg: hsl(266 50% 100%);
     --clr-text: rgb(11, 9, 14);
     --clr-board: rgb(79, 7, 167);

@@ -61,7 +61,7 @@ export function List(props) {
     return <div>
         <div className="list" >
             <div className="list-header">
-                <span id="list-title" onClick={(e) => setEditing(true)}>  {editing ? <form onSubmit={(e) => updateList(e)} > <input type="text" ref={inputRef} value={title} onBlur={(e) => updateList(e)} onChange={(e) => formHandler(e)} />  </form> : (title)} </span>
+                <span id="list-title" onClick={(e) => setEditing(true)}>  {editing ? <form onSubmit={(e) => updateList(e)} > <input type="text" ref={inputRef} value={title} onBlur={(e) => updateList(e)} onChange={(e) => formHandler(e)} />  </form> : (`${title} `)} </span>
                 <button onClick={() => deleteList()} className="delete-btn float-end"> <FaTrash /> </button> </div>
             <Droppable droppableId={props.cards._id}>
                 {(provided) => (
@@ -84,8 +84,8 @@ export function List(props) {
                 )}
             </Droppable>
             <div className="list-footer">
-                <Link className="btn btn-primary btn-newCard" to={`list/${props.cards._id}/create`}> 
-<FaPlus /> New Card</Link>
+                <Link className="btn btn-primary btn-newCard" to={`list/${props.cards._id}/create`}>
+                    <FaPlus /> New Card</Link>
             </div>
         </div >
     </div >

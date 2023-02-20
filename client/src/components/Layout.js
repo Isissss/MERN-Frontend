@@ -19,7 +19,7 @@ export function Layout(props) {
     return <themeContext.Provider value={theme}> <div className={`${theme}`}>
         <header>
             <div className="header">
-                <h3><Link to="/">Home</Link> </h3>
+                <h3><Link to="/"> Home</Link> </h3>
                 <div className="colorPicker">
                     <input type="radio" id="blue" name="color" defaultChecked={theme === "blue"} value="blue" onClick={toggleTheme} />
                     <input type="radio" id="black" name="color" defaultChecked={theme === "black"} value="black" onClick={toggleTheme} />
