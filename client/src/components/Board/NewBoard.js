@@ -19,7 +19,7 @@ export function NewBoard(props) {
         }
         ).then((res) => {
             console.log(res);
-            setBoard({ name: '' });
+            setBoard({ title: '' });
             props.getBoards();
         }).catch((err) => console.log(err));
     }
