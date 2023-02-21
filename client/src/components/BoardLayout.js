@@ -27,11 +27,18 @@ export function BoardLayout(props) {
             })
             .then((data) => data.json())
             .then((data) => setBoard(data))
+            .then(() => console.log('hi'))
             .catch((err) => handleError(err));
     }
 
+
+
     useEffect(boardCallFunc, []);
 
+    function TodoList({ todos, tab }) {
+        const board = useMemo(() => boardCallFunc(), [board]);
+        // ...
+    }
     useEffect(() => {
         props.socket.emit("joinRoom", params.id);
 

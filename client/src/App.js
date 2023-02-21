@@ -7,6 +7,7 @@ import { Error } from './Pages/Error';
 import { Home } from './Pages/Home';
 import { BrowserRouter, useParams, Routes, Route } from 'react-router-dom';
 import { EditCard } from './components/Card/EditCard';
+import { LoginPage } from './Pages/LogIn';
 import { CreateCard } from './components/Card/CreateCard';
 import { BoardLayout } from './components/BoardLayout';
 import io from 'socket.io-client';
@@ -57,6 +58,7 @@ export function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
+                    <Route path="/login" element={<LoginPage />} />
                     <Route path="/" index element={<Home />} />
                     <Route path="board/:id" element={<BoardLayout socket={socket} />}>
                         <Route path="list/:listId/create" element={<CreateCard socket={socket} />} />
