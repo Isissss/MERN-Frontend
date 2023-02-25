@@ -15,7 +15,7 @@ This was my first app using React. I have learned to:
 - Use the React hooks useState, useEffect, useContext, useRef, Fragments, Custom hooks
 - Work with JWT tokens and React protected routes (by using context and custom hooks) ([back-end implementation](https://github.com/Isissss/MERN-backend) tutorials followed from [Dave Gray](https://www.youtube.com/@DaveGrayTeachesCode) as this was my first time working with JWT and protected routes in React. I expanded this system by checking ownership of boards instead of the universal system he created.
 - Work with the libraries [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) and [react-router](https://reactrouter.com/en/main)
- 
+- Work with Socket.IO for a real-time application when creating/deleting/moving/editing cards etc. using rooms and events.   
 
 ## Future additions
 Due to the lack of time there are plenty of things that I was not able to implement. In the future I would like to add the following:
@@ -23,8 +23,8 @@ Due to the lack of time there are plenty of things that I was not able to implem
 - [X] Ability to add boards
 - [ ] Add indexes to list order and ~~fix bug when dragging a card in the same list~~
 - [X] Add an authentication and Authorization system
-- [] Deploy front-end
-- [] Add ability to add members
+- [ ] Deploy front-end
+- [ ] Add ability to add members 
  
 ## Screenshots
 
