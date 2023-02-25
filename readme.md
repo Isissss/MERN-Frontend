@@ -28,9 +28,9 @@ Due to the lack of time there are plenty of things that I was not able to implem
  
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/kytjuK5.png)
+![App Screenshot](https://i.imgur.com/C9E68Xp.png)
 ![App Screenshot](https://i.imgur.com/GvzDjWr.png)
-![App Screenshot](https://i.imgur.com/PH7OODX.png)
+![App Screenshot](https://i.imgur.com/PV9dxv6.png)
 ![App Screenshot](https://i.imgur.com/t0pmgmQ.png)
 ## Run Locally
 
