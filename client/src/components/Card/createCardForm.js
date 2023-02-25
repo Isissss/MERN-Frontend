@@ -2,16 +2,18 @@ import { Button, Form, Modal } from "react-bootstrap"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { ErrorPopup } from "../ErrorPopup";
+import { useOutletContext } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export function CreateCard(props) {
-    const [error, setError] = useState(false);
 
+    const boardCallFunc = useOutletContext();
     const navigate = useNavigate();
+    const { auth } = useAuth();
     const params = useParams();
 
     function handleClose() {
-        navigate("/cards", { replace: true })
+        navigate(`/board/${params.id}`, { replace: true })
     }
 
     const [card, setCard] = useState({
@@ -21,17 +23,13 @@ export function CreateCard(props) {
         severity: '',
         location: '',
         category: '',
-        list_id: params.id
+        list_id: params.listId
     });
 
     function onChangeHandler(e) {
         setCard({ ...card, [e.target.name]: e.target.value });
     }
 
-    const handleError = (err) => {
-        console.log(err);
-        setError(true);
-    };
 
     const createCard = (e) => {
         if (card.title === '' || card.body === '' || card.severity === '' || card.location === '' || card.category === '') {
@@ -42,19 +40,20 @@ export function CreateCard(props) {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${auth.token}`
             },
+            useCredentials: true,
             body: JSON.stringify(card)
         })
-            .then((res) => props.cardRefreshHandler())
+            .then((res) => boardCallFunc())
             .then((res) => handleClose())
-            .then((res) => props.socket.emit("update", props.socket.id))
-            .catch((err) => handleError(err));
+            .then((res) => props.socket.emit("sendUpdate", params.id))
+            .catch((err) => console.log(err));
     };
 
     return <div>
-        {error && <ErrorPopup />}
-        {!error &&
+        {
             <Modal show={true} onHide={() => handleClose()}>
                 <Modal.Header closeButton>
                     <Modal.Title> New card </Modal.Title>
