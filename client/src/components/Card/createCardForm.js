@@ -2,14 +2,16 @@ import { Button, Form, Modal } from "react-bootstrap"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { ErrorPopup } from "../ErrorPopup";
 import { useOutletContext } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+
 export function CreateCard(props) {
-    const [error, setError] = useState(false);
+
     const boardCallFunc = useOutletContext();
     const navigate = useNavigate();
+    const { auth } = useAuth();
     const params = useParams();
- 
+
     function handleClose() {
         navigate(`/board/${params.id}`, { replace: true })
     }
@@ -28,10 +30,6 @@ export function CreateCard(props) {
         setCard({ ...card, [e.target.name]: e.target.value });
     }
 
-    const handleError = (err) => {
-        console.log(err);
-        setError(true);
-    };
 
     const createCard = (e) => {
         if (card.title === '' || card.body === '' || card.severity === '' || card.location === '' || card.category === '') {
@@ -42,19 +40,20 @@ export function CreateCard(props) {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${auth.token}`
             },
+            useCredentials: true,
             body: JSON.stringify(card)
         })
             .then((res) => boardCallFunc())
             .then((res) => handleClose())
             .then((res) => props.socket.emit("sendUpdate", params.id))
-            .catch((err) => handleError(err));
+            .catch((err) => console.log(err));
     };
 
     return <div>
-        {error && <ErrorPopup />}
-        {!error &&
+        {
             <Modal show={true} onHide={() => handleClose()}>
                 <Modal.Header closeButton>
                     <Modal.Title> New card </Modal.Title>

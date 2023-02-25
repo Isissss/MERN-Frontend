@@ -1,4 +1,4 @@
-import { Card } from "./Card/Card";
+import { Card } from "../Card/Card";
 import { Link } from 'react-router-dom';
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { useEffect, useState, useRef } from 'react';

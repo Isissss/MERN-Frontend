@@ -1,15 +1,23 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { BoardList } from "../components/Board/BoardList"
-import { NewBoard } from "../components/Board/NewBoard"
+import { NewBoard } from "../components/Board/createBoardForm"
+import axios from '../api/axios';
+import useAuth from '../hooks/useAuth';
 
-export function Home(props) {
+export function Boards() {
     const [boards, setBoards] = useState([]);
     const BASE_URL = 'https://prg06.iettech.nl/boards';
+    const { auth } = useAuth();
 
     const getBoards = async () => {
-        await axios.get(BASE_URL, { headers: { Accept: 'application/json' } }).then((res) => {
-            setBoards(res.data.items);
+        axios.get(BASE_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${auth.accessToken}`
+            },
+            withCredentials: true
+        }).then((res) => {
+            setBoards(res.data.items)
         }).catch((err) => console.log(err));
     }
 

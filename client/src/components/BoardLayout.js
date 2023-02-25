@@ -1,10 +1,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { Board } from "./Board";
-import { useState, useEffect } from 'react';
+import { Board } from "./Board/Board";
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from "../context/AuthProvider";
 
 export function BoardLayout(props) {
     const params = useParams()
+    const { auth } = useContext(AuthContext);
     const [board, setBoard] = useState([]);
     const navigate = useNavigate();
 
@@ -17,6 +19,7 @@ export function BoardLayout(props) {
             method: 'get',
             headers: {
                 Accept: 'application/json',
+                Authorization: `Bearer ${auth.accessToken}`,
             },
         })
             .then(function (response) {
@@ -27,7 +30,6 @@ export function BoardLayout(props) {
             })
             .then((data) => data.json())
             .then((data) => setBoard(data))
-            .then(() => console.log('hi'))
             .catch((err) => handleError(err));
     }
 
@@ -61,4 +63,6 @@ export function BoardLayout(props) {
             <Outlet context={boardCallFunc} />
         </div>
     </div >
-}   
+}
+
+

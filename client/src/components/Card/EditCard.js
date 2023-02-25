@@ -6,7 +6,13 @@ import { useOutletContext } from "react-router-dom";
 
 export function EditCard(props) {
     const params = useParams();
-    const [card, setCard] = useState([]);
+    const [card, setCard] = useState({
+        title: '',
+        body: '',
+        severity: '',
+        location: '',
+        category: ''
+    });
     const BASE_URL = 'https://prg06.iettech.nl/cards';
     const navigate = useNavigate();
     const boardCallFunc = useOutletContext();

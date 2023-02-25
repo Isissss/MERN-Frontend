@@ -41,7 +41,7 @@ body {
     margin: 5px;
     background: var(--clr-body-bg);
     color: var(--clr-text);
-    max-height: calc(98vh - var(--headerHeight) - 50px);
+    max-height: calc(98vh - var(--headerHeight) - 100px);
 }
 
 .list-header form {
@@ -145,14 +145,27 @@ h3 {
     left: 0;
 }
 
-.board {
+.board-header {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.board-layout {
+    display: flex;
+    flex-direction: column;
     padding-top: 20px;
-    overflow-x: auto;
-    padding: 20px 0 0 10px;
+    height: calc(100vh - var(--headerHeight));
     background-color: var(--clr-board);
-    height: calc(100vh - var(--headerHeight) - 24px)
+}
+
+.board-body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    overflow-x: auto;
+    padding: 0 0 0 10px;
+
 }
 
 .btn-newCard {
@@ -298,12 +311,12 @@ h3 {
     --clr-text: hsl(0 0% 15%);
     --clr-heading: hsl(0 0% 25%);
     --clr-newcard: rgb(199, 199, 199);
-    --headerHeight: 5vh;
+    --headerHeight: 50px;
     --clr-board: hsl(0 0% 15%);
 }
 
 .header {
-    height: 5vh;
+    height: var(--headerHeight);
     background: rgb(252, 252, 252);
     display: flex;
     justify-content: space-between;

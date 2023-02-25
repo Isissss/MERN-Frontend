@@ -2,13 +2,14 @@ import { useParams } from "react-router-dom";
 import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
-
+import useTitle from '../../hooks/useTitle'
 
 export function CardDetail(props) {
     const params = useParams();
     const [card, setCard] = useState(null);
     const BASE_URL = 'https://prg06.iettech.nl/cards';
     const navigate = useNavigate();
+    useTitle(card ? `${card.title} - Trello` : 'Loading')
 
     const cardCall = () => {
         fetch(`${BASE_URL}/${params.cardId}`, {
@@ -17,9 +18,14 @@ export function CardDetail(props) {
             },
         })
             .then((res) => res.json())
-            .then((res) => setCard(res))
+            .then((res) => {
+                setCard(res)
+
+
+            })
             .catch((err) => console.log(err));
     };
+
 
     useEffect(cardCall, []);
 

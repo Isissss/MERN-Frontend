@@ -3,7 +3,7 @@ import { FaPlus } from "react-icons/fa";
 import { CreateListForm } from "./createListForm";
 
 export function NewListButton(props) {
- 
+
     const [creating, setCreating] = useState(false);
 
     function handleClose() {

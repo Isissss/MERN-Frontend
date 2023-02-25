@@ -1,15 +1,25 @@
-import { List } from "./List";
-import { themeContext } from "./Layout";
+import { List } from "../List/List";
+import { themeContext } from "../Layout";
 import { useContext, useEffect } from "react";
-import { NewListButton } from "./NewListButton";
+import { NewListButton } from "../List/createListButton";
 import { DragDropContext } from "react-beautiful-dnd";
+
 
 export function Board(props) {
     if (!props.board) return
-
+    const { theme, setTheme } = useContext(themeContext)
     const lists = props.board.lists
-    const theme = useContext(themeContext)
     const BASE_URL = 'https://prg06.iettech.nl/cards';
+
+    useEffect(() => {
+        localStorage.setItem("theme", JSON.stringify(theme));
+    }, [theme]);
+
+
+    const toggleTheme = (e) => {
+        if (e.target.value === theme || (e.target.value !== "blue" && e.target.value !== "purple" && e.target.value !== "black")) return;
+        setTheme(e.target.value);
+    };
 
     const onDragEnd = (result) => {
         if (!result.destination) return;
@@ -40,12 +50,21 @@ export function Board(props) {
     }
 
     return <DragDropContext onDragEnd={onDragEnd}>
-        <small className="text-muted">{props.board.name}</small>
-        <div className={`board ${theme}`}>
-            {lists.map((value, index) => (
-                <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
-            ))}
-            <NewListButton boardId={props.board._id} cardRefreshHandler={() => props.cardRefreshHandler()} socket={props.socket} />
+        <div className="board-layout">
+            <div className="board-header px-3">
+                <h2 className="text-white"> {props.board.name} </h2>
+                <div className="colorPicker">
+                    <input type="radio" id="blue" name="color" defaultChecked={theme === "blue"} value="blue" onClick={toggleTheme} />
+                    <input type="radio" id="black" name="color" defaultChecked={theme === "black"} value="black" onClick={toggleTheme} />
+                    <input type="radio" id="purple" name="color" defaultChecked={theme === "purple"} value="purple" onClick={toggleTheme} />
+                </div>
+            </div>
+            <div className={`board-body ${theme}`}>
+                {lists.map((value, index) => (
+                    <List cards={lists[index]} key={value._id} socket={props.socket} cardRefreshHandler={() => props.cardRefreshHandler()} />
+                ))}
+                <NewListButton boardId={props.board._id} cardRefreshHandler={() => props.cardRefreshHandler()} socket={props.socket} />
+            </div>
         </div>
     </DragDropContext>
 }

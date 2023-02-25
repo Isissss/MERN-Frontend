@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
-
+import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 export function BoardCard(props) {
-    console.log(props);
-
+    const { auth } = useAuth();
     const BASE_URL = 'https://prg06.iettech.nl/boards';
     const board = props.board;
 
     const deleteBoard = () => {
-        fetch(`${BASE_URL}/${board._id}`, {
-            method: 'DELETE',
+        axios.delete(`${BASE_URL}/${board._id}`, {
             headers: {
                 Accept: 'application/json',
+                Authorization: `Bearer ${auth.accessToken}`,
             },
+            withCredentials: true,
         })
             .then((res) => props.getBoards())
             .catch((err) => console.log(err));
