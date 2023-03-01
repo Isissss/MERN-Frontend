@@ -37,10 +37,6 @@ export function BoardLayout(props) {
 
     useEffect(boardCallFunc, []);
 
-    function TodoList({ todos, tab }) {
-        const board = useMemo(() => boardCallFunc(), [board]);
-        // ...
-    }
     useEffect(() => {
         props.socket.emit("joinRoom", params.id);
 

@@ -60,9 +60,9 @@ export function List(props) {
 
     return <div>
         <div className="list" >
-            <div className="list-header">
+            <div className="list-header  relative">
                 <span id="list-title" onClick={(e) => setEditing(true)}>  {editing ? <form onSubmit={(e) => updateList(e)} > <input type="text" ref={inputRef} value={title} onBlur={(e) => updateList(e)} onChange={(e) => formHandler(e)} />  </form> : (`${title} `)} </span>
-                <button onClick={() => deleteList()} className="delete-btn float-end"> <FaTrash /> </button> </div>
+                <button onClick={() => deleteList()} className="p-0 m-0 d-absolute absolute  delete-btn float-end"> <FaTrash /> </button> </div>
             <Droppable droppableId={props.cards._id}>
                 {(provided) => (
                     <div className="cards"

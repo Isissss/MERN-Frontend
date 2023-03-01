@@ -14,7 +14,7 @@ export function NewListButton(props) {
         {creating ?
             (<div> <CreateListForm boardId={props.boardId} cardRefreshHandler={props.cardRefreshHandler} socket={props.socket} closeHandler={() => handleClose()} /> </div>)
             :
-            (<button className="btn btn-secondary btn-newList" onClick={() => setCreating(true)}> <span> <FaPlus /> <span className="test"> New List</span> </span></button>)
+            (<button className="btn btn-secondary mt-0  btn-newList" onClick={() => setCreating(true)}> <span> <FaPlus /> <span className="test"> New List</span> </span></button>)
         }
     </div >
 }

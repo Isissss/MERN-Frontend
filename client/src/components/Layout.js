@@ -21,9 +21,10 @@ export function Layout(props) {
     return <themeContext.Provider value={{ theme, setTheme }}> <div className={`${theme}`}>
         <header>
             <div className="header">
-                <h3><Link to="/"> Home</Link> </h3>
+                <div className='d-flex align-items-center'><h3 id="logo" className="text-decoration-underline"> Ping.dev  </h3>  {auth.accessToken && <span className="mx-3"> <Link to="/"> View boards </Link>  </span>} </div>
+
                 {auth.accessToken && <div className="d-flex align-items-center">
-                    <span className="me-1"> Welcome {auth.username}! </span>
+                    <span className="me-1"> Welcome back, {auth.username}! </span>
                     <Link to="/login" onClick={signOut}> Logout</Link>
                 </div>
                 }

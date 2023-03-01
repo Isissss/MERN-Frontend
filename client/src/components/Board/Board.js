@@ -7,18 +7,14 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 export function Board(props) {
     if (!props.board) return
-    const { theme, setTheme } = useContext(themeContext)
+    const { theme, setTheme } = useContext(themeContext);
     const lists = props.board.lists
     const BASE_URL = 'https://prg06.iettech.nl/cards';
-
-    useEffect(() => {
-        localStorage.setItem("theme", JSON.stringify(theme));
-    }, [theme]);
-
 
     const toggleTheme = (e) => {
         if (e.target.value === theme || (e.target.value !== "blue" && e.target.value !== "purple" && e.target.value !== "black")) return;
         setTheme(e.target.value);
+        localStorage.setItem("theme", JSON.stringify(e.target.value));
     };
 
     const onDragEnd = (result) => {

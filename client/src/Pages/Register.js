@@ -1,11 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-
-
 import axios from '../api/axios';
 import { Link } from "react-router-dom";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const password_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
 export function Register() {
@@ -19,32 +15,9 @@ export function Register() {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    // useEffect(() => {
-    //     userRef.current.focus();
-    // }, [])
-
-    // useEffect(() => {
-    //     setValidName(USER_REGEX.test(username));
-    // }, [username])
-
-    // useEffect(() => {
-    //     setValidpassword(password_REGEX.test(password));
-    //     setValidMatch(password === matchpassword);
-    // }, [password, matchpassword])
-
-    // useEffect(() => {
-    //     setErrMsg('');
-    // }, [username, password, matchpassword])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // // if button enabled with JS hack
-        // const v1 = USER_REGEX.test(username);
-        // const v2 = password_REGEX.test(password);
-        // if (!v1 || !v2) {
-        //     setErrMsg("Invalid Entry");
-        //     return;
-        // }
+
         try {
             const response = await axios.post(REGISTER_URL,
                 JSON.stringify({ username, password }),
@@ -53,14 +26,12 @@ export function Register() {
                     withCredentials: true
                 }
             );
-            // TODO: remove console.logs before deployment
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response))
+
             setSuccess(true);
-            //clear state and controlled inputs
+
             setUsername('');
             setpassword('');
-            setMatchpassword('');
+
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -80,13 +51,22 @@ export function Register() {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <Link to="/login"> Sign-in </Link>
                     </p>
                 </section>
             ) : (
                 <section>
 
                     <h1>Register</h1>
+
+                    <div
+                        className="error"
+                        ref={errRef}
+
+                    >
+                        {errMsg}
+                    </div>
+
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
                             Username:
@@ -114,6 +94,7 @@ export function Register() {
                         <input
                             type="password"
                             id="password"
+                            autoComplete="off"
                             onChange={(e) => setpassword(e.target.value)}
                             value={password}
                             required
@@ -121,23 +102,6 @@ export function Register() {
                             aria-describedby="passwordnote"
 
                         />
-
-
-
-                        {/* <label htmlFor="confirm_password">
-                            Confirm Password:
-
-                        </label>
-                        <input
-                            type="password"
-                            id="confirm_password"
-                            onChange={(e) => setMatchpassword(e.target.value)}
-                            value={matchpassword}
-                            required
-
-                            aria-describedby="confirmnote"
-                 
-                        /> */}
 
                         <button>Sign Up</button>
                     </form>
